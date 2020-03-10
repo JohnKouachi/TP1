@@ -89,13 +89,13 @@ public class Porto {
     
         Petroleiro petro1 = new Petroleiro("P1"); petro1.setCarga(200);
     
-        PortaContentores pConta1 = new PortaContentores("PC01"); pConta1.setNoContentores(50);
+        PortaContentores pConta1 = new PortaContentores("PC01"); pConta1.setNoContentores(150);
     
-        PortaContentores pConta2 = new PortaContentores("PC02"); pConta2.setNoContentores(20);
+        PortaContentores pConta2 = new PortaContentores("PC02"); pConta2.setNoContentores(30);
     
         Navio n = new Navio("N01");
     
-        Petroleiro petro2 = new Petroleiro("P2"); petro2.setCarga(200);
+        Petroleiro petro2 = new Petroleiro("P2"); petro2.setCarga(20);
 
         porto.addNavio(petro1);
         porto.addNavio(petro2);
