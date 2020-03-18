@@ -6,6 +6,7 @@
 package TP1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,71 +14,54 @@ import java.util.ArrayList;
  */
 public class Porto {
    
-    private int ct;
-    private int noMaxNavios;
+    private List<Navio> navios;
+
+    public Porto() {
+        navios = new ArrayList<>();
+        
+    } 
     
-    
-    ArrayList<Navio> navio;
-    
-
-    public Porto(int noMaxNavios) {
-        ct = 0;
-        this.noMaxNavios = noMaxNavios;
-       
-        navio = new ArrayList<Navio>(noMaxNavios);
-    }
-
-    public int getNoMaxNavios() {
-        return noMaxNavios;
-    }
-
-    
-
-    public void addNavio(Navio n) {
-
-        if (ct == noMaxNavios) {
-            System.out.println("Número máximo de navios (" + noMaxNavios + ") Atingido!!");
+    private boolean procura(Navio nv) {
+        for(Navio n:navios){
+            if(n.getMatricula().equals(nv.getMatricula())) return true;
         }
-        boolean confirma = false;
-        for (Navio nave : navio) {
-            if (n.equals(nave.getMatricula())) {
-                System.out.println("Navio já existe!!");
-                confirma = true;
-            }
-
-            if (!confirma) {
-                navio.add(nave);
-                ct++;
-            }
-
-        }
-
+        return false;
+    }
+    
+    public void addNavio( Navio n){
+        if(!procura(n))      
+            navios.add(n);
     }
 
     public int getCapacidadeTotal() {
 
-        int total = 0;
-        for (Navio p : navio) {
-            if (p instanceof PortaContentores) {
-                total += ((PortaContentores) p).getNoContentores();
+        int ct = 0;
+        for (Navio n : navios) {
+            if (n instanceof PortaContentores) {
+                ct += ((PortaContentores) n).getNoContentores();
                         
             }
         }
 
-        return total;
+        return ct;
     }
 
-    public int getCargaTotal() {
-        int total = 0;
-        for (Navio p : navio) {
+    public float getCargaTotal() {
+        float total = 0;
+        for (Navio p : navios) {
             if (p instanceof PortaContentores) {
-                total += ((PortaContentores) p).getNoContentores() * 10;
+                total += ((PortaContentores) p).getNoContentores() * 10f;
             }
             if (p instanceof Petroleiro) {
-                total += ((Petroleiro) p).getCarga() * 10;
+                total += ((Petroleiro) p).getCarga();
             }
         }
         return total;
+    }
+    
+    public void listNavios(){
+        for(Navio n:navios)
+                System.out.println(n);
     }
     
    
@@ -85,26 +69,37 @@ public class Porto {
 
 //main
     public static void main(String[] args) {
-        Porto porto = new Porto(3);
+        //criação do porto
+        Porto porto = new Porto();
     
-        Petroleiro petro1 = new Petroleiro("P1"); petro1.setCarga(200);
+        //criação de navios
+        Petroleiro petro1 = new Petroleiro("P1"); petro1.setCarga(20); petro1.setNome("petroleiro 1");
+        
+        Petroleiro petro2 = new Petroleiro("P2"); petro2.setCarga(20); petro2.setNome("petroleiro 2");
+        
+        PortaContentores pConta1 = new PortaContentores("PC01"); pConta1.setNoContentores(10); pConta1.setNome("Porta Contentores 1");
     
-        PortaContentores pConta1 = new PortaContentores("PC01"); pConta1.setNoContentores(150);
+        PortaContentores pConta2 = new PortaContentores("PC02"); pConta2.setNoContentores(30); pConta2.setNome("Porta Contentores 2");
     
-        PortaContentores pConta2 = new PortaContentores("PC02"); pConta2.setNoContentores(30);
+        Navio n = new Navio("N01"); n.setComprimento(4); n.setNome("Navio 1");
     
-        Navio n = new Navio("N01");
-    
-        Petroleiro petro2 = new Petroleiro("P2"); petro2.setCarga(20);
-
+            
+        //adicionar os navios
         porto.addNavio(petro1);
         porto.addNavio(petro2);
         porto.addNavio(pConta1);
         porto.addNavio(pConta2);
         porto.addNavio(n);
-
-        System.out.println("Capacidade total = " + porto.getCargaTotal() + " toneladas.");
+        
+        //verificar atributos
+        porto.listNavios();
+        
+        //print de capacidade total e cont26entores 
+        System.out.println("Capacidade t5notal = " + porto.getCargaTotal() + " toneladas.");
+        System.out.printf("carga = %.1f %n",  porto.getCargaTotal());
+       
         System.out.println("contentores total = " + porto.getCapacidadeTotal());
+        
     }
 }
 

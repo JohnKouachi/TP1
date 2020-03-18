@@ -24,6 +24,11 @@ public class PortaContentores extends Navio {
     public void setNoContentores(int noContentores) {
         this.noContentores = noContentores;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "PortaContentores{" + "noContentores=" + noContentores + '}';
+    }
     
 }
 

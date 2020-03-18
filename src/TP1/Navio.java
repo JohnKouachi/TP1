@@ -11,8 +11,7 @@ package TP1;
  */
 public class Navio {
     
-    private String matricula;
-    private String nome;
+    private String matricula, nome;
     private float comprimento;
     
     public Navio(String matricula) {
@@ -36,6 +35,11 @@ public class Navio {
 
     public void setComprimento(float comprimento) {
     this.comprimento = comprimento;
+    }
+
+    @Override
+    public String toString() {
+        return "Navio{" + "matricula=" + matricula + ", nome=" + nome + ", comprimento=" + comprimento + '}';
     }
 
 }

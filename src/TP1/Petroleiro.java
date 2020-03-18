@@ -25,6 +25,11 @@ public class Petroleiro extends Navio {
         this.carga = carga;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "Petroleiro{" + "carga=" + carga + '}';
+    }
+
 }
 
 
